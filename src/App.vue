@@ -2,7 +2,8 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput @add:todo="addTodo"></TodoInput>
-    <TodoList :props-data="todoItems"></TodoList>
+    <TodoList :props-data="todoItems" 
+              @remove:todo="removeTodo"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -44,7 +45,12 @@ export default defineComponent({
       todoItems.push(todoItemObj);
     };//addTodo
 
-    return { todoItems, addTodo };
+    const removeTodo = (todoItemStr: string, index: number) => {
+      localStorage.removeItem(todoItemStr);
+      todoItems.splice(index, 1);
+    };
+
+    return { todoItems, addTodo, removeTodo };
   }, //setup
 });
 </script>

@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref } from 'vue'
+import { PropType } from 'vue'
 import TodoItem from '@/types/TodoItem'
 
 const props = defineProps({
@@ -25,12 +25,10 @@ const props = defineProps({
         required: true }
 })
 
-
-const todoItems = ref<TodoItem[]>([])
+const emit = defineEmits(["remove:todo"])
 
 const removeTodo = (todoItem: string, index: number) => {
-    localStorage.removeItem(todoItem)
-    todoItems.value.splice(index, 1)
+    emit('remove:todo', todoItem, index)
 }
 
 const toggleComplete = (todoItem: TodoItem) => {
