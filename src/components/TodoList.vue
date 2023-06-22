@@ -13,8 +13,9 @@
 
 <script setup lang="ts">
 import { ref, onBeforeMount } from 'vue'
+import TodoItem from '../types/TodoItem';
 
-const todoItems = ref<string[]>([])
+const todoItems = ref<TodoItem[]>([])
 
 //life cycle hook
 onBeforeMount(() => {
@@ -22,7 +23,8 @@ onBeforeMount(() => {
     if (localStorage.length > 0) {
         for (var i = 0; i < localStorage.length; i++) {
             const storageKey = localStorage.key(i) as string
-            todoItems.value.push(storageKey)
+            const itemJson = localStorage.getItem(storageKey);
+            todoItems.value.push(itemJson)
         }
     }
     console.log(todoItems.value)
