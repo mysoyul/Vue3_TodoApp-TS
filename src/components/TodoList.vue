@@ -1,6 +1,10 @@
 <template>
     <div>
-
+        <ul>
+            <li v-for="(item,idx) in todoItems" v-bind:key="idx">
+                {{ item }}
+            </li>
+        </ul>
     </div>
 </template>
 
