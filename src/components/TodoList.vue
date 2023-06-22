@@ -2,7 +2,8 @@
     <div>
         <ul>
             <li v-for="(todoItem, idx) in todoItems" :key="idx">
-                <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todoItem.completed }"></i>
+                <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todoItem.completed }" 
+                    @click="toggleComplete(todoItem)"></i>
                 <span :class="{ textCompleted: todoItem.completed }">
                     {{ todoItem.item }}
                 </span>
