@@ -3,7 +3,7 @@
     <TodoHeader></TodoHeader>
     <TodoInput @add:todo="addTodo"></TodoInput>
     <TodoList :props-data="todoItems" 
-              @remove:todo="removeTodo"></TodoList>
+    @remove:todo="removeTodo" @toggle:todo="toggleComplete"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -50,7 +50,14 @@ export default defineComponent({
       todoItems.splice(index, 1);
     };
 
-    return { todoItems, addTodo, removeTodo };
+    const toggleComplete = (todoItem: TodoItem, index: number) => {
+      const { item, completed } = todoItem;
+      todoItems[index].completed = !completed;
+      localStorage.removeItem(item);
+      localStorage.setItem(item, JSON.stringify(todoItems[index]));
+    };
+
+    return { todoItems, addTodo, removeTodo, toggleComplete };
   }, //setup
 });
 </script>
