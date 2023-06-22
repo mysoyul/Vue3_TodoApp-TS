@@ -38,6 +38,12 @@ const removeTodo = (todoItem: string, index: number) => {
     todoItems.value.splice(index, 1)
 }
 
+const toggleComplete = (todoItem: TodoItem) => {
+    const { item, completed } = todoItem
+    localStorage.removeItem(item);
+    localStorage.setItem(item, JSON.stringify({item, completed:!completed}));
+}
+
 </script>
 
 <style scoped>
