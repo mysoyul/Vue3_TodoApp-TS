@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList :propsdata="todoItems"></TodoList>
+    <TodoList :props-data="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>

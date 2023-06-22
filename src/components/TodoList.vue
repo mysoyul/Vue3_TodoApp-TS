@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul>
-            <li v-for="(todoItem, idx) in todoItems" :key="idx">
+            <li v-for="(todoItem, idx) in props.propsData" :key="idx">
                 <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todoItem.completed }" 
                     @click="toggleComplete(todoItem)"></i>
                 <span :class="{ textCompleted: todoItem.completed }">
@@ -16,23 +16,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount } from 'vue'
+import { PropType, ref } from 'vue'
 import TodoItem from '@/types/TodoItem'
 
-const todoItems = ref<TodoItem[]>([])
-
-//life cycle hook
-onBeforeMount(() => {
-    console.log('mounted in the composition api!')
-    if (localStorage.length > 0) {
-        for (var i = 0; i < localStorage.length; i++) {
-            const storageKey = localStorage.key(i) as string
-            const itemJson = localStorage.getItem(storageKey);
-            todoItems.value.push(JSON.parse(itemJson as string))
-        }
-    }
-    console.log(todoItems.value)
+const props = defineProps({
+    propsData: { 
+        type: Array as PropType<TodoItem[]>, 
+        required: true }
 })
+
+
+const todoItems = ref<TodoItem[]>([])
 
 const removeTodo = (todoItem: string, index: number) => {
     localStorage.removeItem(todoItem)
