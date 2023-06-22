@@ -4,8 +4,10 @@
         <span class="addContainer" @click="addTodo">
             <i class="fas fa-plus addBtn"></i>
         </span>
+        <!-- <Teleport to="body"> -->
         <MyModal v-if="showModal" @close="showModal = false">
             <template v-slot:header>
+            <!-- <template #header>     -->
                 <h3>
                     경고!
                     <i class="closeModalBtn fas fa-times" @click="showModal = false"></i>
@@ -15,6 +17,7 @@
                 <div>아무것도 입력하지 않으셨습니다.</div>
             </template>
         </MyModal>
+        <!-- </Teleport> -->
     </div>
 </template>
 

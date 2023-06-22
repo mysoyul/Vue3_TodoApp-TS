@@ -40,7 +40,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
     display: table;
-    transition: opacity .3s ease;
+    transition: opacity 0.3s ease;
   }
   .modal-wrapper {
     display: table-cell;
