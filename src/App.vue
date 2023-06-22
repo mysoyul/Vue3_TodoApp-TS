@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
+    <TodoInput @add:todo="addTodo"></TodoInput>
     <TodoList :props-data="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
@@ -36,9 +36,15 @@ export default defineComponent({
           } //if
         } //for
       } //if
-    });
+    }); //onBeforeMount
 
-    return { todoItems };
+    const addTodo = (todoItemStr: string) => {
+      const todoItemObj = { completed: false, item: todoItemStr };
+      localStorage.setItem(todoItemStr, JSON.stringify(todoItemObj));
+      todoItems.push(todoItemObj);
+    };//addTodo
+
+    return { todoItems, addTodo };
   }, //setup
 });
 </script>
