@@ -24,7 +24,7 @@ onBeforeMount(() => {
         for (var i = 0; i < localStorage.length; i++) {
             const storageKey = localStorage.key(i) as string
             const itemJson = localStorage.getItem(storageKey);
-            todoItems.value.push(itemJson)
+            todoItems.value.push(JSON.parse(itemJson as string))
         }
     }
     console.log(todoItems.value)
