@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { ref, onBeforeMount } from 'vue'
-import TodoItem from '../types/TodoItem';
+import TodoItem from '@/types/TodoItem'
 
 const todoItems = ref<TodoItem[]>([])
 
