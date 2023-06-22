@@ -41,8 +41,9 @@ const removeTodo = (todoItem: string, index: number) => {
 
 const toggleComplete = (todoItem: TodoItem) => {
     const { item, completed } = todoItem
+    todoItem.completed = !completed;
     localStorage.removeItem(item);
-    localStorage.setItem(item, JSON.stringify({item, completed:!completed}));
+    localStorage.setItem(item, JSON.stringify(todoItem));
 }
 
 </script>
