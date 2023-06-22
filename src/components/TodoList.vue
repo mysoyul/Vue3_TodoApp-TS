@@ -1,9 +1,9 @@
 <template>
     <div>
         <ul>
-            <li v-for="(item, idx) in todoItems" :key="idx">
-                {{ item }}
-                <span class="removeBtn" @click="removeTodo(item, idx)">
+            <li v-for="(todoItem, idx) in todoItems" :key="idx">
+                {{ todoItem.item }}
+                <span class="removeBtn" @click="removeTodo(todoItem.item, idx)">
                     <i class="fas fa-trash-alt"></i>
                 </span>
             </li>
