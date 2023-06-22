@@ -24,7 +24,8 @@ const handleInput = (event: Event) => {
 const addTodo = () => {
     const todoItem = newTodoItem.value
     if (todoItem !== "") {
-        localStorage.setItem(todoItem, todoItem)
+        const todoItemObj = {completed: false, item:todoItem}
+        localStorage.setItem(todoItem, JSON.stringify(todoItemObj))  //Object => JSON 변환
         clearInput()
     }
 }
