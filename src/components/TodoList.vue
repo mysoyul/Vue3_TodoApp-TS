@@ -24,15 +24,14 @@ import TodoItem from '@/types/TodoItem'
 const store = useStore()
 const todoItems = computed(() => store.state.todoItems)
 
-const emit = defineEmits(["remove:todo","toggle:todo"])
-
 const removeTodo = (todoItem: TodoItem, index: number) => {
     //emit('remove:todo', todoItemStr, index)
     store.commit("removeTodo", {todoItem, index} )
 }
 
 const toggleComplete = (todoItem: TodoItem, index: number) => {
-    emit('toggle:todo', todoItem, index)
+    //emit('toggle:todo', todoItem, index)
+    store.commit("toggleTodo", {todoItem, index})
 }
 
 </script>
