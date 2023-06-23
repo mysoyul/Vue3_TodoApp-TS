@@ -3,7 +3,7 @@
         <TransitionGroup name="list" tag="ul">
             <li v-for="(todoItem, idx) in todoItems" :key="idx">
                 <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todoItem.completed }"
-                    @click="toggleComplete(todoItem, idx)"></i>
+                    @click="toggleComplete(todoItem)"></i>
                 <span :class="{ textCompleted: todoItem.completed }">
                     {{ todoItem.item }}
                 </span>
@@ -36,9 +36,11 @@ const removeTodo = (todoItem: TodoItem) => {
     store.dispatch("removeTodo", todoItem)
 }
 
-const toggleComplete = (todoItem: TodoItem, index: number) => {
+const toggleComplete = (todoItem: TodoItem) => {
     //emit('toggle:todo', todoItem, index)
-    store.commit("toggleTodo", { todoItem, index })
+    //store.commit("toggleTodo", { todoItem, index })
+    todoItem.completed = !todoItem.completed
+    store.dispatch("toggleTodo", todoItem)
 }
 
 </script>
