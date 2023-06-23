@@ -2,7 +2,7 @@
     <div>
         <TransitionGroup name="list" tag="ul">
             <li v-for="(todoItem, idx) in todoItems" :key="idx">
-                <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todoItem.completed }" 
+                <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todoItem.completed }"
                     @click="toggleComplete(todoItem, idx)"></i>
                 <span :class="{ textCompleted: todoItem.completed }">
                     {{ todoItem.item }}
@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useStore } from "vuex"
 
 import TodoItem from '@/types/TodoItem'
@@ -24,20 +24,27 @@ import TodoItem from '@/types/TodoItem'
 const store = useStore()
 const todoItems = computed(() => store.state.todoItems)
 
+onMounted(() => {
+    console.log('onMounted...')
+    store.dispatch("loadTodoItems")
+});
+
+
 const removeTodo = (todoItem: TodoItem, index: number) => {
     //emit('remove:todo', todoItemStr, index)
-    store.commit("removeTodo", {todoItem, index} )
+    store.commit("removeTodo", { todoItem, index })
 }
 
 const toggleComplete = (todoItem: TodoItem, index: number) => {
     //emit('toggle:todo', todoItem, index)
-    store.commit("toggleTodo", {todoItem, index})
+    store.commit("toggleTodo", { todoItem, index })
 }
 
 </script>
 
 <style scoped>
-i,span {
+i,
+span {
     cursor: pointer;
 }
 
@@ -78,11 +85,14 @@ li {
     text-decoration: line-through;
     color: #b3adad;
 }
-.list-enter-active, .list-leave-active {
-  transition: all 0.5s ease;
+
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.5s ease;
 }
-.list-enter-from, .list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-</style>
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}</style>
