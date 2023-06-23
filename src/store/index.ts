@@ -25,7 +25,14 @@ const state: State = { todoItems: storage.fetch() };
 export const store = createStore({
     plugins: process.env.NODE_ENV === 'development' ?
         [createLogger()] : [],
-    state,    
+    state,
+    mutations: {
+        addTodo(state, todoItemStr:string) {
+            const obj: TodoItem = { completed: false, item: todoItemStr };
+            localStorage.setItem(todoItemStr, JSON.stringify(obj));
+            state.todoItems.push(obj);
+        },
+    },
 })
 
 
