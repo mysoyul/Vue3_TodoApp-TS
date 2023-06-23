@@ -41,7 +41,7 @@ export const modulePost: Module<ModulePostState, RootState> = {
                 .then((items) => commit("setPosts", items))
                 .catch((err) => console.error(err));
         },
-        loadPost({ commit }, payload) {
+        loadPost({ commit }, payload: Post) {
             http
                 .get(`/posts/${payload.id}`)
                 .then((res) => res.data
@@ -49,7 +49,7 @@ export const modulePost: Module<ModulePostState, RootState> = {
                 .then((item) => commit("setPost", item))
                 .catch((err) => console.error(err));
         },
-        removePost({ commit }, id) {
+        removePost({ commit }, id: number) {
             http
                 .delete(`/posts/${id}`)
                 .then((res) => res.data
@@ -57,7 +57,7 @@ export const modulePost: Module<ModulePostState, RootState> = {
                 .then((items) => commit("setPosts", items))
                 .catch((err) => console.error(err));
         },
-        addPost({ commit }, payload) {
+        addPost({ commit }, payload: Post) {
             http
                 .post(`/posts`, payload)
                 .then((res) => res.data
