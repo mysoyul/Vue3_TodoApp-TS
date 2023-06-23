@@ -12,15 +12,19 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, defineEmits } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router"
 import { useStore } from "vuex"
+import Post from "@/types/Post"
 
 const store = useStore()
 const router = useRouter()
+
 const isSaving = ref(false)
 const inputTxt = ref('')
+
 const emit = defineEmits(["input:post"])
+
 const btnTxt = computed(() => isSaving.value ? 'Saving...' : 'Save')
 const disabled = computed(() => isSaving.value)
 
@@ -33,7 +37,7 @@ const handleInput = (event: InputEvent) => {
 
 const onSubmit = () => {
     isSaving.value = true
-    const postObj = { text: inputTxt.value };
+    const postObj: Post = { text: inputTxt.value };
     store.dispatch('modulePost/addPost', postObj).then(() => {
         isSaving.value = false;
         inputTxt.value = '';
