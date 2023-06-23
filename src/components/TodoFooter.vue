@@ -17,7 +17,7 @@ export default defineComponent({
 
         const clearTodo = () => {
             //store.commit("clearTodo")
-            store.dispatch("clearTodo")
+            store.dispatch("moduleTodo/clearTodo")
         }
         return { clearTodo }
     }

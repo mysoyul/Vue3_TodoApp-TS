@@ -22,7 +22,7 @@ import { useStore } from "vuex"
 import TodoItem from '@/types/TodoItem'
 
 const store = useStore()
-const todoItems = computed(() => store.state.todoItems)
+const todoItems = computed(() => store.state.moduleTodo.todoItems)
 
 onMounted(() => {
     console.log('onMounted...')
@@ -33,14 +33,14 @@ onMounted(() => {
 const removeTodo = (todoItem: TodoItem) => {
     //emit('remove:todo', todoItemStr, index)
     //store.commit("removeTodo", { todoItem, index })
-    store.dispatch("removeTodo", todoItem)
+    store.dispatch("moduleTodo/removeTodo", todoItem)
 }
 
 const toggleComplete = (todoItem: TodoItem) => {
     //emit('toggle:todo', todoItem, index)
     //store.commit("toggleTodo", { todoItem, index })
     todoItem.completed = !todoItem.completed
-    store.dispatch("toggleTodo", todoItem)
+    store.dispatch("moduleTodo/toggleTodo", todoItem)
 }
 
 </script>
