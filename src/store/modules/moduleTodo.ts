@@ -23,9 +23,8 @@ export const moduleTodo: Module<ModuleTodoState, RootState> = {
                     commit('setTodoItems', items)
                 })
                 .catch(error => {
-                    console.log(error)
                     if (axios.isAxiosError(error)) {
-                        console.log(error?.response?.status +
+                        console.error(error?.response?.status +
                             ' : ' + error.message)
                     } else {
                         console.error(error);

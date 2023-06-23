@@ -25,8 +25,7 @@ const store = useStore()
 const todoItems = computed(() => store.state.moduleTodo.todoItems)
 
 onMounted(() => {
-    console.log('onMounted...')
-    store.dispatch("loadTodoItems")
+    store.dispatch("moduleTodo/loadTodoItems")
 });
 
 
