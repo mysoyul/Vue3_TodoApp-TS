@@ -4,26 +4,10 @@ import axios from "axios"
 import TodoItem from "@/types/TodoItem"
 import http from "@/common/http-common"
 
-const storage = {
-    fetch() {
-        const arr = [];
-        if (localStorage.length > 0) {
-            for (let i = 0; i < localStorage.length; i++) {
-                const storageKey = localStorage.key(i) as string;
-                const itemJson = localStorage.getItem(storageKey) as string | null
-                if (itemJson) {
-                    arr.push(JSON.parse(itemJson))
-                }
-            }
-        }
-        return arr;
-    }
-}
-
 //State 타입 선언
 export type State = { todoItems: TodoItem[] };
 
-const state: State = { todoItems: storage.fetch() };
+const state: State = { todoItems: [] };
 
 export const store = createStore({
     plugins: process.env.NODE_ENV === 'development' ?
@@ -38,6 +22,7 @@ export const store = createStore({
                     commit('setTodoItems', items)
                 })
                 .catch(error => {
+                    console.log(error)
                     if (axios.isAxiosError(error)) {
                         console.log(error?.response?.status +
                             ' : ' + error.message)
@@ -45,6 +30,22 @@ export const store = createStore({
                         console.error(error);
                     }
                 });
+        },
+        removeTodo({ commit }, payload: TodoItem) {
+            http
+                .delete(`/todos/${payload.id}`)
+                .then(r => r.data)
+                .then(items => {
+                    commit('setTodoItems', items)
+                })
+        },
+        addTodo({ commit }, payload: TodoItem) {
+            http
+                .post(`/todos`, payload)
+                .then(r => r.data)
+                .then(items => {
+                    commit('setTodoItems', items)
+                })
         },
     },
     mutations: {

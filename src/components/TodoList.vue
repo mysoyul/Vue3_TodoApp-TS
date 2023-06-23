@@ -7,7 +7,7 @@
                 <span :class="{ textCompleted: todoItem.completed }">
                     {{ todoItem.item }}
                 </span>
-                <span class="removeBtn" @click="removeTodo(todoItem, idx)">
+                <span class="removeBtn" @click="removeTodo(todoItem)">
                     <i class="fas fa-trash-alt"></i>
                 </span>
             </li>
@@ -30,9 +30,10 @@ onMounted(() => {
 });
 
 
-const removeTodo = (todoItem: TodoItem, index: number) => {
+const removeTodo = (todoItem: TodoItem) => {
     //emit('remove:todo', todoItemStr, index)
-    store.commit("removeTodo", { todoItem, index })
+    //store.commit("removeTodo", { todoItem, index })
+    store.dispatch("removeTodo", todoItem)
 }
 
 const toggleComplete = (todoItem: TodoItem, index: number) => {
