@@ -7,7 +7,7 @@
                 <span :class="{ textCompleted: todoItem.completed }">
                     {{ todoItem.item }}
                 </span>
-                <span class="removeBtn" @click="removeTodo(todoItem.item, idx)">
+                <span class="removeBtn" @click="removeTodo(todoItem, idx)">
                     <i class="fas fa-trash-alt"></i>
                 </span>
             </li>
@@ -26,8 +26,9 @@ const todoItems = computed(() => store.state.todoItems)
 
 const emit = defineEmits(["remove:todo","toggle:todo"])
 
-const removeTodo = (todoItemStr: string, index: number) => {
-    emit('remove:todo', todoItemStr, index)
+const removeTodo = (todoItem: TodoItem, index: number) => {
+    //emit('remove:todo', todoItemStr, index)
+    store.commit("removeTodo", {todoItem, index} )
 }
 
 const toggleComplete = (todoItem: TodoItem, index: number) => {
